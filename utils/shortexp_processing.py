@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-def clean_csv_shortexp(input_filepath, output_dir):
+def shortexp_clean_csv(input_filepath, output_dir):
     # Read the CSV file
     df = pd.read_csv(input_filepath)
     
