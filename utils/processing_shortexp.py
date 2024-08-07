@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-def clean_csv(input_filepath, output_dir):
+def clean_csv_shortexp(input_filepath, output_dir):
     # Read the CSV file
     df = pd.read_csv(input_filepath)
     
@@ -45,7 +45,7 @@ def main():
     input_file_path = '01_M_shortexp.csv'
     output_dir_path = 'temp/'
 
-    result_message = clean_csv(input_file_path, output_dir_path)
+    result_message = clean_csv_shortexp(input_file_path, output_dir_path)
     print(result_message)
 
 if __name__ == '__main__':
