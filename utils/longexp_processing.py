@@ -3,11 +3,51 @@ import numpy as np
 import re
 
 def longexp_process_data(file_path):
-    # Extract PID and GENDER from the file name
+    """
+    Processes a CSV file containing behavioral data from an experiment, evaluates responses,
+    and computes performance metrics.
+
+    Parameters:
+    - file_path (str): The path to the CSV file. The filename should follow the format:
+      'P_Id_gender_longexp.csv', where 'P_Id' is a numerical participant identifier and
+      'gender' is either 'M' or 'F'.
+
+    Returns:
+    - dict: A dictionary containing the following keys and their corresponding values:
+        - 'P_Id': (str) Participant identifier extracted from the filename.
+        - 'gender': (str) Gender extracted from the filename ('M' or 'F').
+        - 'trial_accuracy': (float) Accuracy percentage for the trial block.
+        - 'avg_rt_trials': (float) Average reaction time (RT) in seconds for the trial block.
+        - 'block_1_accuracy': (float) Accuracy percentage for block 1.
+        - 'avg_rt_block1': (float) Average RT in seconds for block 1.
+        - 'block_2_accuracy': (float) Accuracy percentage for block 2.
+        - 'avg_rt_block2': (float) Average RT in seconds for block 2.
+        - 'block_3_accuracy': (float) Accuracy percentage for block 3.
+        - 'avg_rt_block3': (float) Average RT in seconds for block 3.
+        - 'block_4_accuracy': (float) Accuracy percentage for block 4.
+        - 'avg_rt_block4': (float) Average RT in seconds for block 4.
+        - 'total_accuracy': (float) Average accuracy across all blocks.
+        - 'avg_rt_all': (float) Average RT across all blocks.
+
+    Raises:
+    - ValueError: If the filename does not match the expected format.
+
+    Detailed Steps:
+    1. Extracts the participant ID and gender from the filename.
+    2. Loads the CSV data into a pandas DataFrame and filters relevant columns.
+    3. Converts reaction time values from list-like strings to float.
+    4. Filters rows with valid responses.
+    5. Evaluates responses based on conditions and calculates accuracies.
+    6. Computes average reaction times for trials and blocks.
+    7. Returns a dictionary with the calculated metrics and participant details.
+    """
+    
+    # Extract P_Id and gender from the file name
     file_name = file_path.split('/')[-1]
-    match = re.match(r'(\d{2})_(M|F)_.+\.csv', file_name)
+    # Extract P_Id before the first underscore and gender after it
+    match = re.match(r'(\d+)_([MF])_.+\.csv', file_name)
     if match:
-        PID, GENDER = match.groups()
+        P_Id, gender = match.groups()
     else:
         raise ValueError("Filename does not match expected format.")
     
@@ -96,8 +136,8 @@ def longexp_process_data(file_path):
 
     # Prepare the output dictionary
     output = {
-        'PID': PID,
-        'gender': GENDER,
+        'P_Id': P_Id,
+        'gender': gender,
         'trial_accuracy': trial_accuracy,
         'avg_rt_trials': avg_rt_trials,
         'block_1_accuracy': block_1_accuracy,
@@ -113,3 +153,12 @@ def longexp_process_data(file_path):
     }
 
     return output
+
+"""
+def main():
+    print('TESTING...')
+    print(longexp_process_data('/home/iiserb/Desktop/PSYCHOPY_ANALYSIS/ANALYSIS_LONG_EXP/DATASET_LONG_EXP/01_M_longexp.csv'))
+
+if __name__ == '__main__':
+    main()
+"""
