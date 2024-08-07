@@ -1,11 +1,11 @@
 import os
 import sys
 from pathlib import Path
-from utils import shortexp_clean_csv
-
 
 # Add the parent directory to the system path to locate the `utils` module
 sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+from utils import shortexp_clean_csv  # Import should be after sys.path adjustment
 
 # Define the input and output directories
 INPUT_DIR = Path('ANALYSIS_SHORT_EXP/DATASET_SHORT_EXP')
