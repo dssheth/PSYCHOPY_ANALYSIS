@@ -8,7 +8,7 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 from utils import shortexp_clean_csv 
 
 # Define the input and output directories
-INPUT_DIR = Path('ANALYSIS_SHORT_EXP/SHORT_EXP_DATASET')
+INPUT_DIR = Path('ANALYSIS_SHORT_EXP/DATASET_SHORT_EXP')
 OUTPUT_DIR = Path('ANALYSIS_SHORT_EXP/RESULTS')
 
 def main():
