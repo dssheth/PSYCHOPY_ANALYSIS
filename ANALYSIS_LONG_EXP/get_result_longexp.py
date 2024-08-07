@@ -2,12 +2,12 @@ import os
 import sys
 import pandas as pd
 from pathlib import Path
-from utils import longexp_process_data
-
 
 # Add the parent directory to the system path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
+# Import after adjusting BASE_DIR path
+from utils import longexp_process_data
 
 def process_directory(directory_path, output_file):
     results = []
@@ -24,6 +24,9 @@ def process_directory(directory_path, output_file):
     
     # Convert results to a DataFrame
     results_df = pd.DataFrame(results)
+
+    # Sort the DataFrame by the 'P_Id' column in increasing order
+    results_df.sort_values(by='P_Id', inplace=True)
     
     # Save the DataFrame to an Excel file
     results_df.to_excel(output_file, index=False)
